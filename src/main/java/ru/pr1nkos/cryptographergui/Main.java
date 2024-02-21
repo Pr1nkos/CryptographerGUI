@@ -2,7 +2,6 @@ package ru.pr1nkos.cryptographergui;
 
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Main {
 	//TODO Сократить объем Main. Вынести механизмы по классам.

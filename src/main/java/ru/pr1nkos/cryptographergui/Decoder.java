@@ -1,7 +1,5 @@
 package ru.pr1nkos.cryptographergui;
 
-
-
 import java.util.*;
 import java.util.stream.Collectors;
 
