@@ -17,8 +17,6 @@ n
 >src/main/java/ru/pr1nkos/cryptographergui/HelloController.java,c\2\c21dba46eabbc9a5f6aafe65af64de0574d89169
 n
 >src/main/java/ru/pr1nkos/cryptographergui/QuickSortMethod.java,9\0\90fef00c811a2cb4002e1347040d20ebed69994c
-d
-4src/main/java/ru/pr1nkos/cryptographergui/styles.css,9\e\9e6ad3f914c078fd9c8f68afa442c52144dd1df8
 ]
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
 S
