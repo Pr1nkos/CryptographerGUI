@@ -29,7 +29,7 @@
 
 2. **Запустите Крипто-Магию:**
    ```bash
-   java -jar .\out\artifacts\CryptographerGUI_jar\CryptographerGUI.jar
+   java -jar .\src\CryptographerGUI.jar
    ```
 
 Просто скачайте проект, запустите jar-файл, и погрузитесь в мир шифрования с уникальным проектом по Java!
