@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="CryptographerGUI">
+    <output-path>$PROJECT_DIR$/out/artifacts/CryptographerGUI</output-path>
+    <root id="root">
+      <element id="archive" name="CryptographerGUI.jar">
+        <element id="module-output" name="CryptographerGUI" />
+      </element>
+    </root>
+  </artifact>
+</component>
