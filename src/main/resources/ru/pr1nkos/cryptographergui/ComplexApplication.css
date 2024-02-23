@@ -1,18 +1,80 @@
-.menu-bar {
-    -fx-background-color: #aeb5ba, linear-gradient(to bottom, #ecf4fa 0%, #ced4d9 100%);
-    -fx-background-insets: 0, 0 0 1 0;
+/* ComplexApplication.css */
+
+.root {
+    -fx-font-size: 16;
 }
 
-.menu-bar .menu .label {
-    -fx-text-fill: #2d3e4c;
+/* MenuBar styles */
+MenuBar {
+    -fx-text-fill: white;
 }
 
-.split-pane > .split-pane-divider {
-    -fx-background-color: linear-gradient(to right, #ecf4fa 0%, #ced4d9 100%);
-    -fx-padding: 0 3 0 3;
+Menu {
+    -fx-text-fill: white;
 }
 
+MenuItem {
+    -fx-text-fill: white;
+}
+
+/* SplitPane styles */
+.split-pane {
+    -fx-background-color: #e5e5e5;
+}
+
+/* File History styles */
+#fileHistoryListView {
+    -fx-border-color: lightgray;
+    -fx-border-width: 1;
+    -fx-padding: 5;
+}
+
+#fileHistoryListView .list-cell {
+    -fx-padding: 5;
+}
+
+#fileHistoryListView .list-cell:hover {
+    -fx-background-color: lightblue;
+}
+
+#fileHistoryListView .list-cell:selected {
+    -fx-background-color: lightblue;
+}
+
+/* Labels styles */
+#leftStatusLabel, #rightStatusLabel {
+    -fx-font-size: 12;
+    -fx-text-fill: darkgray;
+}
+
+/* ScrollPane styles */
 .scroll-pane {
-    -fx-background-insets: 0, 0;
-    -fx-padding: 0;
+    -fx-background-color: #e5e5e5;
+}
+
+/* HBox styles */
+#HBox {
+    -fx-background-color: #333333;
+}
+
+/* AnchorPane styles */
+AnchorPane {
+    -fx-background-color: #ffffff;
+}
+
+/* ListView styles */
+.list-view {
+    -fx-background-color: white;
+}
+
+.list-view .list-cell {
+    -fx-background-color: white;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #e5e5e5;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #e5e5e5;
 }

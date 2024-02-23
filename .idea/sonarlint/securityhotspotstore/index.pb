@@ -21,3 +21,7 @@ n
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+v
+Fsrc/main/java/ru/pr1nkos/cryptographergui/FileEncryptorController.java,3\4\34973c2a0ab96285b5b91ff47c8ca28d0201f2b7
+Å
+Q.idea/sonarlint/securityhotspotstore/3/4/34973c2a0ab96285b5b91ff47c8ca28d0201f2b7,8\3\83bfa5e357a343c3d8f85efd3664d60fe98419b4

@@ -2,9 +2,9 @@ package ru.pr1nkos.cryptographergui;
 
 
 
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class Crypter {
@@ -19,13 +19,7 @@ public class Crypter {
 			'<', '>', '.', ',', '/', '?', '|', '\\', '`', '~', ' '
 	};
 
-	public static void codeList() {
-		Scanner sc = new Scanner(System.in);
-
-		List<Character> textToCode = FileOperations.readFileToCrypt();
-		System.out.println("Введите ключ для расшифровки файла:");
-		int key = sc.nextInt();
-
+	public static List<Character> codeList(List<Character> textToCode, int key) {
 		List<Character> codedListOfCharacters = new ArrayList<>();
 		for (char ch : textToCode) {
 			if (ch == '\n' || ch == '\t') {
@@ -45,12 +39,9 @@ public class Crypter {
 				codedListOfCharacters.add(codedChar);
 			}
 		}
-
-		System.out.println("Хотите сохранить файл с ключом? (yes/no):");
-		FileOperations.writeKey(key);
-		FileOperations.writeToFileUTF8(codedListOfCharacters);
-		System.out.println("Шифрование завершено. Возвращение в меню.");
+		return codedListOfCharacters;
 	}
+
 
 	private static boolean isInAlphabet(char ch) {
 		for (char alphabetChar : ALPHABET) {
