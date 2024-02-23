@@ -21,7 +21,7 @@ public class FileEncryptorController {
 	@FXML
 	private TextArea rightTextArea;
 
-
+	protected static int keyFound = 0;
 	private List<Character> fileContent;
 
 	@FXML
@@ -41,10 +41,10 @@ public class FileEncryptorController {
 		if (fileContent != null && !fileContent.isEmpty()) {
 			try {
 				int key = Integer.parseInt(keyTextField.getText());
-				List<Character> encryptedContent = Crypter.codeList(fileContent, key);
+				List<Character> encryptedContent = Crypt.codeList(fileContent, key);
 				rightTextArea.setText(encryptedContent.stream().map(Object::toString).collect(Collectors.joining()));
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				e.printStackTrace(System.out);
 			}
 		}
 	}
@@ -57,22 +57,22 @@ public class FileEncryptorController {
 				List<Character> encryptedContent = Decoder.decode(fileContent, key);
 				rightTextArea.setText(encryptedContent.stream().map(Object::toString).collect(Collectors.joining()));
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				e.printStackTrace(System.out);
 			}
 		}
 	}
 
 	@FXML
-	private void handledecryptBySpaces() {
+	private void handleDecryptBySpaces() {
 		if (fileContent != null && !fileContent.isEmpty()) {
 			try {
 				List<Character> encryptedContent = Decoder.decodeBySpaces(fileContent);
 				rightTextArea.setText(encryptedContent.stream().map(Object::toString).collect(Collectors.joining()));
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				e.printStackTrace(System.out);
 			}
 		}
-		keyTextField.setText(String.valueOf(Decoder.keyFound));
+		keyTextField.setText(String.valueOf(keyFound));
 	}
 
 	@FXML
@@ -82,12 +82,16 @@ public class FileEncryptorController {
 				List<Character> encryptedContent = Decoder.decodeBruteForce(fileContent);
 				rightTextArea.setText(encryptedContent.stream().map(Object::toString).collect(Collectors.joining()));
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				e.printStackTrace(System.out);
 			}
 		}
-		keyTextField.setText(String.valueOf(Decoder.keyFound));
-		Decoder.keyFound = 0;
+		keyTextField.setText(String.valueOf(keyFound));
+		resetCount();
 	}
+	private static void resetCount(){
+		keyFound = 0;
+	}
+
 
 	@FXML
 	private void handleStatistics() {
@@ -96,11 +100,11 @@ public class FileEncryptorController {
 				List<Character> encryptedContent = Decoder.decodeWithStatisticalAnalyser(fileContent);
 				rightTextArea.setText(encryptedContent.stream().map(Object::toString).collect(Collectors.joining()));
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				e.printStackTrace(System.out);
 			}
 		}
-		keyTextField.setText(String.valueOf(Decoder.keyFound));
-		Decoder.keyFound = 0;
+		keyTextField.setText(String.valueOf(keyFound));
+		resetCount();
 	}
 
 	@FXML
@@ -114,8 +118,8 @@ public class FileEncryptorController {
 					encryptedContentList.add(ch);
 				}
 				FileOperations.writeToFileUTF8(encryptedContentList);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace(System.out);
 			}
 		}
 	}
@@ -126,7 +130,7 @@ public class FileEncryptorController {
 			int key = Integer.parseInt(keyTextField.getText());
 			FileOperations.writeKey(key);
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			e.printStackTrace(System.out);
 		}
 	}
 

@@ -6,78 +6,55 @@
 
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="ru.pr1nkos.cryptographergui.FileEncryptorController">
-    <children>
-        <MenuBar VBox.vgrow="NEVER">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleOpenFileAction" text="Open"/>
-                        <MenuItem mnemonicParsing="false" onAction="#handleSaveFileAction" text="Save File"/>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Encrypt">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleEncryptButtonAction" text="Encrypt"/>
-                        <SeparatorMenuItem mnemonicParsing="false"/>
-                        <MenuItem mnemonicParsing="false" onAction="#handleSaveKeyAction" text="Save Key"/>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Decrypt">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleDecryptWithKey" text="With key"/>
-                        <Menu mnemonicParsing="false" text="BruteForce">
-                            <items>
-                                <MenuItem mnemonicParsing="false" onAction="#handleByDictionary" text="By dictionary"/>
-                                <MenuItem mnemonicParsing="false" onAction="#handledecryptBySpaces"
-                                          text="Count Spaces"/>
-                            </items>
-                        </Menu>
-                        <SeparatorMenuItem mnemonicParsing="false"/>
-                        <MenuItem mnemonicParsing="false" onAction="#handleStatistics" text="Statistical Analise"/>
-                    </items>
-                </Menu>
-
-            </menus>
-        </MenuBar>
-        <HBox spacing="10.0" alignment="CENTER">
-            <TextField fx:id="keyTextField" alignment="CENTER" maxWidth="-Infinity" prefHeight="25.0" prefWidth="183.0"
-                       promptText="Enter key"/>
-            <Button maxWidth="-Infinity" onAction="#handleSaveKeyAction" prefHeight="25.0" prefWidth="85.0"
-                    text="Save key"/>
-        </HBox>
-
-        <SplitPane dividerPositions="0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0"
-                   VBox.vgrow="ALWAYS">
-            <items>
-
-                <ScrollPane fx:id="leftScrollPane" fitToHeight="true" fitToWidth="true">
-                    <content>
-                        <AnchorPane>
-                            <children>
-                                <TextArea fx:id="leftTextArea" editable="false" promptText=""
-                                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </ScrollPane>
-                <ScrollPane fx:id="rightScrollPane" fitToHeight="true" fitToWidth="true">
-                    <content>
-                        <AnchorPane>
-
-                            <children>
-                                <TextArea fx:id="rightTextArea" editable="false" promptText=""
-                                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </ScrollPane>
-            </items>
-        </SplitPane>
-
-    </children>
     <stylesheets>
         <URL value="@ComplexApplication.css"/>
     </stylesheets>
+    <MenuBar VBox.vgrow="NEVER">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" onAction="#handleOpenFileAction" text="Open"/>
+            <MenuItem mnemonicParsing="false" onAction="#handleSaveFileAction" text="Save File"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Encrypt">
+            <MenuItem mnemonicParsing="false" onAction="#handleEncryptButtonAction" text="Encrypt"/>
+            <SeparatorMenuItem mnemonicParsing="false"/>
+            <MenuItem mnemonicParsing="false" onAction="#handleSaveKeyAction" text="Save Key"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Decrypt">
+            <MenuItem mnemonicParsing="false" onAction="#handleDecryptWithKey" text="With key"/>
+            <Menu mnemonicParsing="false" text="BruteForce">
+                <MenuItem mnemonicParsing="false" onAction="#handleByDictionary" text="By dictionary"/>
+                <MenuItem mnemonicParsing="false" onAction="#handleDecryptBySpaces"
+                          text="Count Spaces"/>
+            </Menu>
+            <SeparatorMenuItem mnemonicParsing="false"/>
+            <MenuItem mnemonicParsing="false" onAction="#handleStatistics" text="Statistical Analise"/>
+        </Menu>
+
+    </MenuBar>
+    <HBox spacing="10.0" alignment="CENTER">
+        <TextField fx:id="keyTextField" alignment="CENTER" maxWidth="-Infinity" prefHeight="25.0" prefWidth="183.0"
+                   promptText="Enter key"/>
+        <Button maxWidth="-Infinity" onAction="#handleSaveKeyAction" prefHeight="25.0" prefWidth="85.0"
+                text="Save key"/>
+    </HBox>
+
+    <SplitPane dividerPositions="0.5" focusTraversable="true"
+               VBox.vgrow="ALWAYS">
+        <ScrollPane fitToHeight="true" fitToWidth="true">
+            <AnchorPane>
+                <TextArea fx:id="leftTextArea" editable="false"
+                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+            </AnchorPane>
+        </ScrollPane>
+        <ScrollPane fitToHeight="true" fitToWidth="true">
+            <AnchorPane>
+
+                <TextArea fx:id="rightTextArea" editable="false"
+                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+            </AnchorPane>
+        </ScrollPane>
+    </SplitPane>
+
 </VBox>

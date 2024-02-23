@@ -12,8 +12,10 @@ import static java.lang.Math.pow;
 
 public class Decoder {
 
-	public static int keyFound = 0;
 
+	private Decoder() {
+		throw new IllegalStateException("Utility class");
+	}
 	public static List<Character> decode(List<Character> textToDecrypt, int key) {
 		List<Character> decodedListOfCharacters = new ArrayList<>();
 		for (char ch : textToDecrypt) {
@@ -22,8 +24,8 @@ public class Decoder {
 			}
 			else if (isInAlphabet(ch)) {
 				int index = findAlphabetIndex(ch);
-				int newIndex = (index - key + Crypter.ALPHABET.length) % Crypter.ALPHABET.length;
-				char codedChar = Crypter.ALPHABET[newIndex];
+				int newIndex = (index - key + Crypt.ALPHABET.length) % Crypt.ALPHABET.length;
+				char codedChar = Crypt.ALPHABET[newIndex];
 				decodedListOfCharacters.add(codedChar);
 			}
 		}
@@ -32,7 +34,7 @@ public class Decoder {
 
 
 	private static boolean isInAlphabet(char ch) {
-		for (char alphabetChar : Crypter.ALPHABET) {
+		for (char alphabetChar : Crypt.ALPHABET) {
 			if (ch == alphabetChar) {
 				return true;
 			}
@@ -41,8 +43,8 @@ public class Decoder {
 	}
 
 	private static int findAlphabetIndex(char ch) {
-		for (int i = 0; i < Crypter.ALPHABET.length; i++) {
-			if (ch == Crypter.ALPHABET[i]) {
+		for (int i = 0; i < Crypt.ALPHABET.length; i++) {
+			if (ch == Crypt.ALPHABET[i]) {
 				return i;
 			}
 		}
@@ -61,13 +63,10 @@ public class Decoder {
 			Map<Character, Double> combinedRepresentativeMap = combineStatistics(selectedFiles);
 			Map<Character, Double> encryptedStats = calculateLetterFrequency(textToDecrypt);
 			findBestShift(combinedRepresentativeMap, encryptedStats);
-			decodedText.addAll(decode(textToDecrypt, keyFound));
+			decodedText.addAll(decode(textToDecrypt, FileEncryptorController.keyFound));
 		}
 		return decodedText;
 	}
-
-
-
 
 	public static Map<Character, Double> combineStatistics(List<File> files) {
 		List<Map<Character, Double>> listOfRepresentativeTexts = new ArrayList<>();
@@ -82,7 +81,7 @@ public class Decoder {
 		int numberOfFiles = listOfRepresentativeTexts.size();
 
 		for (Map<Character, Double> mapToAdd : listOfRepresentativeTexts) {
-			for (char letter : Crypter.ALPHABET) {
+			for (char letter : Crypt.ALPHABET) {
 				double combinedFrequency = combinedStats.getOrDefault(letter, 0.0) + mapToAdd.getOrDefault(letter, 0.0);
 				combinedStats.put(letter, combinedFrequency);
 			}
@@ -92,25 +91,11 @@ public class Decoder {
 		return combinedStats;
 	}
 
-
 	public static List<Character> decodeBruteForce(List<Character> textToDecrypt) {
 		Map<String, Integer> filteredDictionary = buildDictionary();
 		List<List<Character>> decodedListOfListsOfCharacters = new ArrayList<>();
-		for (int i = 0; i < Crypter.ALPHABET.length; i++) {
-			List<Character> decodedListOfCharacters = new ArrayList<>();
-
-			for (char ch : textToDecrypt) {
-				if (ch == '\n' || ch == '\t') {
-					decodedListOfCharacters.add(ch);
-				}
-				else if (isInAlphabet(ch)) {
-					int index = findAlphabetIndex(ch);
-					int newIndex = (index - i + Crypter.ALPHABET.length) % Crypter.ALPHABET.length;
-					char decodedChar = Crypter.ALPHABET[newIndex];
-					decodedListOfCharacters.add(decodedChar);
-				}
-			}
-			decodedListOfListsOfCharacters.add(decodedListOfCharacters);
+		for (int i = 0; i < Crypt.ALPHABET.length; i++) {
+			decodedListOfListsOfCharacters.add(decode(textToDecrypt,i));
 		}
 		decodedListOfListsOfCharacters.reversed();
 		return findBestTextFromList(decodedListOfListsOfCharacters, filteredDictionary);
@@ -119,21 +104,8 @@ public class Decoder {
 
 	public static List<Character> decodeBySpaces(List<Character> textToDecrypt) {
 		List<List<Character>> decodedListOfListsOfCharacters = new ArrayList<>();
-		for (int i = 0; i < Crypter.ALPHABET.length; i++) {
-			List<Character> decodedListOfCharacters = new ArrayList<>();
-
-			for (char ch : textToDecrypt) {
-				if (ch == '\n' || ch == '\t') {
-					decodedListOfCharacters.add(ch);
-				}
-				else if (isInAlphabet(ch)) {
-					int index = findAlphabetIndex(ch);
-					int newIndex = (index - i + Crypter.ALPHABET.length) % Crypter.ALPHABET.length;
-					char decodedChar = Crypter.ALPHABET[newIndex];
-					decodedListOfCharacters.add(decodedChar);
-				}
-			}
-			decodedListOfListsOfCharacters.add(decodedListOfCharacters);
+		for (int i = 0; i < Crypt.ALPHABET.length; i++) {
+			decodedListOfListsOfCharacters.add(decode(textToDecrypt,i));
 		}
 		decodedListOfListsOfCharacters.reversed();
 		return findBestTextFromListBySpace(decodedListOfListsOfCharacters);
@@ -149,7 +121,7 @@ public class Decoder {
 			if (currentSpaceCount > maxSpaceCount) {
 				maxSpaceCount = currentSpaceCount;
 				bestMatchText = new ArrayList<>(decodedText);
-				keyFound = i;
+				FileEncryptorController.keyFound = i;
 			}
 		}
 
@@ -176,7 +148,7 @@ public class Decoder {
 				bestMatchScore = currentScore;
 				bestMatchText = new ArrayList<>(decodedText);
 			}
-			keyFound++;
+			FileEncryptorController.keyFound++;
 		}
 
 		return bestMatchText;
@@ -273,21 +245,21 @@ public class Decoder {
 	public static void findBestShift(Map<Character, Double> representativeStats, Map<Character, Double> encryptedStats) {
 		double minDeviation = Double.MAX_VALUE;
 
-		for (int shift = 0; shift < Crypter.ALPHABET.length; shift++) {
+		for (int shift = 0; shift < Crypt.ALPHABET.length; shift++) {
 
 			double deviation;
 			deviation = calculateDeviation(representativeStats, encryptedStats, shift);
 			if (deviation < minDeviation) {
 				minDeviation = deviation;
-				keyFound = shift;
+				FileEncryptorController.keyFound = shift;
 			}
 		}
 	}
 
 	private static char shiftChar(char ch, int shift) {
 		if (Character.isLetter(ch)) {
-			int base = Crypter.ALPHABET[0];
-			return (char) ((ch - base + shift + Crypter.ALPHABET.length) % Crypter.ALPHABET.length + base);
+			int base = Crypt.ALPHABET[0];
+			return (char) ((ch - base + shift + Crypt.ALPHABET.length) % Crypt.ALPHABET.length + base);
 		}
 		else {
 			return ch;

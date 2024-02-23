@@ -1,80 +1,80 @@
-/* ComplexApplication.css */
-
 .root {
-    -fx-font-size: 16;
+    -fx-font-size: 14pt;
+    -fx-font-family: "Arial";
 }
 
-/* MenuBar styles */
-MenuBar {
+.menu-bar .menu {
     -fx-text-fill: white;
 }
 
-Menu {
+.menu-bar .menu .menu-item {
     -fx-text-fill: white;
 }
 
-MenuItem {
-    -fx-text-fill: white;
+.button, .text-field {
+    -fx-font-size: 12pt;
 }
 
-/* SplitPane styles */
+
 .split-pane {
-    -fx-background-color: #e5e5e5;
+    -fx-divider-position: 0.5;
 }
 
-/* File History styles */
-#fileHistoryListView {
-    -fx-border-color: lightgray;
-    -fx-border-width: 1;
-    -fx-padding: 5;
+
+.scroll-pane, .text-area {
+    -fx-background-color: #f4f4f4;
+    -fx-text-fill: #333333;
 }
 
-#fileHistoryListView .list-cell {
-    -fx-padding: 5;
+
+.separator-menu-item {
+    -fx-border-color: #666666;
+    -fx-border-width: 0 0 1 0;
 }
 
-#fileHistoryListView .list-cell:hover {
-    -fx-background-color: lightblue;
+
+.anchor-pane {
+    -fx-padding: 10;
 }
 
-#fileHistoryListView .list-cell:selected {
-    -fx-background-color: lightblue;
+
+.text-area:disabled {
+    -fx-opacity: 1.0;
 }
 
-/* Labels styles */
-#leftStatusLabel, #rightStatusLabel {
-    -fx-font-size: 12;
-    -fx-text-fill: darkgray;
+
+.text-area .caret {
+    -fx-background-color: transparent;
 }
 
-/* ScrollPane styles */
-.scroll-pane {
-    -fx-background-color: #e5e5e5;
+
+.text-area .selection {
+    -fx-background-color: #acdefa;
 }
 
-/* HBox styles */
-#HBox {
-    -fx-background-color: #333333;
+
+.text-field .prompt-text {
+    -fx-text-fill: derive(-fx-control-inner-background, -30%);
 }
 
-/* AnchorPane styles */
-AnchorPane {
-    -fx-background-color: #ffffff;
+
+.menu-bar .button {
+    -fx-text-fill: white;
 }
 
-/* ListView styles */
-.list-view {
-    -fx-background-color: white;
+
+.menu .separator {
+    -fx-background-color: #666666;
 }
 
-.list-view .list-cell {
-    -fx-background-color: white;
+
+#keyTextField {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);
 }
 
-.list-view .list-cell:hover {
-    -fx-background-color: #e5e5e5;
+
+.button#handleSaveKeyAction {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
 }
 
-.list-view .list-cell:selected {
-    -fx-background-color: #e5e5e5;
-}

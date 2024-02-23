@@ -19,31 +19,22 @@ import java.util.*;
 
 
 public class FileOperations {
-	public static List<File> chooseFilesForStatistics() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Выберите файлы для статистического анализа");
-		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("Text Files", "*.txt"),
-				new FileChooser.ExtensionFilter("All Files", "*.*")
-		);
 
-		Stage stage = new Stage();
-		List<File> selectedFiles = fileChooser.showOpenMultipleDialog(stage);
-
-		if (selectedFiles == null || selectedFiles.isEmpty()) {
-			// Пользователь не выбрал файлы или отменил операцию
-			return Collections.emptyList();
-		}
-
-		return selectedFiles;
+	private FileOperations() {
+		throw new IllegalStateException("Utility class");
 	}
+
+	private static final String TEXTFILES = "Text Files";
+	private static final String ALLFILES = "All Files";
+	private static final String EXT = "*.txt";
+
 
 	public static List<Character> readFile() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Выберите файл для открытия");
 		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("Text Files", "*.txt"),
-				new FileChooser.ExtensionFilter("All Files", "*.*")
+				new FileChooser.ExtensionFilter(TEXTFILES, EXT),
+				new FileChooser.ExtensionFilter(ALLFILES, "*.*")
 		);
 
 		Stage stage = new Stage();
@@ -53,42 +44,7 @@ public class FileOperations {
 		}
 
 
-
 		return readFromFileUTF8(selectedFile);
-	}
-
-	public static Optional<Integer> readKeyFromFile() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Выберите файл с ключом");
-		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("Text Files", "*.txt"),
-				new FileChooser.ExtensionFilter("All Files", "*.*")
-		);
-
-		Stage stage = new Stage();
-		File selectedFile = fileChooser.showOpenDialog(stage);
-		if (selectedFile == null) {
-			return Optional.empty();
-		}
-
-		StringBuilder stringBuilder = new StringBuilder();
-		try (FileChannel fileChannel = FileChannel.open(selectedFile.toPath(), StandardOpenOption.READ)) {
-			int bufferSize = 40000;
-			ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
-			while (fileChannel.read(buffer) != -1) {
-				buffer.flip();
-				CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
-				CharBuffer charBuffer = decoder.decode(buffer);
-				for (int i = 0; i < charBuffer.length(); i++) {
-					stringBuilder.append(charBuffer.get(i));
-				}
-				buffer.clear();
-			}
-		} catch (IOException e) {
-			e.printStackTrace(System.out);
-		}
-
-		return Optional.of(Integer.parseInt(stringBuilder.toString().trim()));
 	}
 
 
@@ -116,8 +72,8 @@ public class FileOperations {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Сохранить файл");
 		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("Text Files", "*.txt"),
-				new FileChooser.ExtensionFilter("All Files", "*.*")
+				new FileChooser.ExtensionFilter(TEXTFILES, EXT),
+				new FileChooser.ExtensionFilter(ALLFILES, "*.*")
 		);
 
 		Stage stage = new Stage();
@@ -147,8 +103,8 @@ public class FileOperations {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Выберите файл для сохранения ключа");
 		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("Text Files", "*.txt"),
-				new FileChooser.ExtensionFilter("All Files", "*.*")
+				new FileChooser.ExtensionFilter(TEXTFILES, EXT),
+				new FileChooser.ExtensionFilter(ALLFILES, "*.*")
 		);
 
 		Stage stage = new Stage();
@@ -158,7 +114,13 @@ public class FileOperations {
 					StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING)) {
 				String keyString = Integer.toString(key);
 				ByteBuffer buffer = StandardCharsets.UTF_8.encode(CharBuffer.wrap(keyString));
-				fileChannel.write(buffer);
+				int bytesWritten = fileChannel.write(buffer);
+				if (bytesWritten != keyString.length()) {
+					System.out.println("Ошибка при записи ключа в файл");
+				}
+				else {
+					System.out.println("Ключ успешно записан в файл");
+				}
 				fileChannel.force(true);
 			} catch (IOException e) {
 				e.printStackTrace(System.out);

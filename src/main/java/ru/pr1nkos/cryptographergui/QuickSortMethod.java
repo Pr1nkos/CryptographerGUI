@@ -3,6 +3,9 @@ package ru.pr1nkos.cryptographergui;
 import java.util.*;
 
 public class QuickSortMethod {
+	private QuickSortMethod(){
+		throw new IllegalStateException("Utility class");
+	}
 
 	public static Map<String, Integer> sortDictionary(Map<String, Integer> dictionary) {
 		List<Map.Entry<String, Integer>> entries = new ArrayList<>(dictionary.entrySet());
