@@ -1,12 +1,8 @@
 
-g
-7src/main/java/ru/pr1nkos/cryptographergui/files/key.txt,3\7\37383c3a0a2af57b40bffdb7ccf63ca1020b1e3f
 c
 3src/main/java/ru/pr1nkos/cryptographergui/Main.java,d\3\d348e4809fee15d9dbe87bf5d39f5c394e50f9c1
 f
 6src/main/java/ru/pr1nkos/cryptographergui/Decoder.java,9\e\9eff35b203c68923c2f03207832cbf779f2f86e7
-f
-6src/main/java/ru/pr1nkos/cryptographergui/Crypter.java,4\c\4c67976d65a5ba43ce14c40c01ff54f2b4ec19f8
 m
 =src/main/java/ru/pr1nkos/cryptographergui/FileOperations.java,a\c\ac47091ac6d77bcf43eac31fc6a11153e67d05e1
 7

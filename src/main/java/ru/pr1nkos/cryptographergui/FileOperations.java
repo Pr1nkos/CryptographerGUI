@@ -1,6 +1,5 @@
 package ru.pr1nkos.cryptographergui;
 
-
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
